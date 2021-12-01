@@ -1,0 +1,54 @@
+{% block content %}
+
+<form method="post" style="margin-left:600px" enctype="multipart/form-data">
+
+    {% csrf_token %}
+
+    <h1 style="color:blue;"> Welcome to Sentimental Analyser </h1>
+    <hr style="width:50%;text-align:left;margin-left:0">
+    <input align="center" type="file" name="in_file">
+    <hr style="width:50%;text-align:left;margin-left:0">
+    <button class="btn btn-lg btn-primary" style="background-color:3399FF" type="submit">Upload</button>
+    <hr style="width:50%;text-align:left;margin-left:0">
+</form>
+<table class="table" >
+  <thead>
+  <style>
+    table, th, td {
+      border: 1px solid black;
+      border-collapse: collapse;
+      width: 40%;
+      margin: auto;
+     }
+</style>
+  </thead>
+
+    {% for val, sentiments in pdf_obj %}
+    <tr>
+        <th colspan="2"  scope="row" >{{forloop.counter}}</th>
+        <td> {{val}}</td>
+        {% if sentiments == "Negative Tone" %}
+            <td style="color:red;"> {{sentiments}}</td>
+            {% elif sentiments == "Neutral Tone" %}
+            <td style="color:blue;"> {{sentiments}}</td>
+            {%elif sentiments == "Positive Tone"%}
+            <td style="color:green;"> {{sentiments}}</td>
+
+        {% endif %}
+    </tr>
+    {% endfor %}
+}
+</table>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
